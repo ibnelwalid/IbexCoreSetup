@@ -4,3 +4,6 @@
 [submodule "riscv-isa-sim"]
 	path = riscv-isa-sim
 	url = https://github.com/lowRISC/riscv-isa-sim.git
+[submodule "riscv-crypto"]
+	path = riscv-crypto
+	url = https://github.com/riscv/riscv-crypto

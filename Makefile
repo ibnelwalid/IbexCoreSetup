@@ -23,6 +23,7 @@ clone_crypto_gnu_toolchain:
 	cd ../ &&\
 	git clone https://github.com/riscv/riscv-gnu-toolchain &&\
 	cd riscv-gnu-toolchain &&\
+	git rm qemu &&\
 	git submodule update --init &&\
 	cd riscv-gcc &&\
 	git remote add k https://github.com/WuSiYu/riscv-gcc &&\

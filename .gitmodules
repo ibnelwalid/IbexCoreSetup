@@ -1,12 +1,3 @@
 [submodule "ibex"]
 	path = ibex
 	url = https://github.com/ibnelwalid/ibex.git
-[submodule "riscv-isa-sim"]
-	path = riscv-isa-sim
-	url = https://github.com/lowRISC/riscv-isa-sim.git
-[submodule "riscv-crypto"]
-	path = riscv-crypto
-	url = https://github.com/ibnelwalid/riscv-crypto.git
-[submodule "riscv-gnu-toolchain"]
-	path = riscv-gnu-toolchain
-	url = https://github.com/riscv/riscv-gnu-toolchain

@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: run_rtl.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ibex/dv/uvm/core_ibex/run_rtl.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/ibex/dv/uvm/core_ibex",
+            "args": [
+                "--simulator",
+                "questa",
+                "--simulator_yaml",
+                "yaml/rtl_simulation.yaml",
+                "--en_wave",
+                "--start-seed",
+                "16183",
+                "--sim-opts=+signature_addr=8ffffffc -g/core_ibex_tb_top/RV32E=0 -g/core_ibex_tb_top/BranchTargetALU=1 -g/core_ibex_tb_top/WritebackStage=1 -g/core_ibex_tb_top/ICache=1 -g/core_ibex_tb_top/ICacheECC=1 -g/core_ibex_tb_top/BranchPredictor=0 -g/core_ibex_tb_top/PMPEnable=1 -g/core_ibex_tb_top/PMPGranularity=0 -g/core_ibex_tb_top/PMPNumRegions=16 -g/core_ibex_tb_top/SecureIbex=1 -g/core_ibex_tb_top/ICacheScramble=0'",
+                "--test-dot-seed",
+                "aes_enc_simple.16183",
+                "--bin-dir",
+                "out/seed-16183/instr_gen/asm_test",
+                "--rtl-sim-dir",
+                "out/seed-16183/rtl_sim"
+            ]
+        }
+    ]
+}

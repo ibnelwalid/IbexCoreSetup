@@ -7,7 +7,7 @@ docker pull ubuntu:20.04
 docker run -it ubuntu:20.04 bash
 apt-get update
 apt-get install ca-certificates curl gnupg lsb-release
-apt-get install git gawk texinfo bison flex python expect ninja-build pkg-config libglib2.0-dev vim make
+apt-get install git gawk texinfo bison flex python expect ninja-build pkg-config libglib2.0-dev vim make g++
 mkdir IbexCoreCryptoExtensionWorkDir
 cd IbexCoreCryptoExtensionWorkDir
 git clone https://github.com/ibnelwalid/IbexCoreSetup

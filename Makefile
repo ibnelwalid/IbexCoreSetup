@@ -1,16 +1,12 @@
 SHELL = /bin/bash
-#export RISCV=${PWD}/lowrisc-toolchain-rv32imcb-20220210-1
-#export RISCV_ARCH=riscv32-unknown-elf
-#export RISCV_GCC=${PWD}/riscv-crypto/build/riscv32-unknown-elf/bin/riscv64-unknown-elf-gcc
-#export RISCV_OBJCOPY= ${PWD}/riscv-crypto/build/riscv32-unknown-elf/bin/riscv64-unknown-elf-objcopy
 export ISA=rv32imc_zbkb_zbkc_zbkx_zkne_zknd_zknh
-export ABI=ilp32
+#export ABI=ilp32
 export RISCV=${PWD}/riscv-gnu-toolchain/rv32imc_zkn
 export RISCV_GCC=${RISCV}/bin/riscv32-unknown-elf-gcc
 export RISCV_OBJCOPY=${RISCV}/bin/riscv32-unknown-elf-objcopy
 export SPIKE_PATH=${RISCV}/bin
 export SIMULATOR=questa
-export QUESTA_HOME=/home/yahmed/qsim_builds/V2022.1_1
+export QUESTA_HOME=/home/yahmed/Tools/MGC/QuestaSim/2022.3_2
 export PRJ_DIR=${PWD}/ibex
 
 lowrisc_toolchain_setup:
@@ -19,28 +15,33 @@ ifeq (,$(wildcard ./lowrisc-toolchain-rv32imcb-20220210-1.tar.xz))
 endif
 	tar -xvf lowrisc-toolchain-rv32imcb-20220210-1.tar.xz
 
-clone_crypto_gnu_toolchain:
-	cd ../ &&\
+clone_riscv_gnu_toolchain:
 	git clone https://github.com/riscv/riscv-gnu-toolchain &&\
 	cd riscv-gnu-toolchain &&\
 	git rm qemu &&\
-	git submodule update --init &&\
-	cd riscv-gcc &&\
+	git submodule update --init
+
+clone_isa_sim:
+	git clone https://github.com/riscv-software-src/riscv-isa-sim.git
+
+clone_riscv_crypto_specific_stuff:
+	cd riscv-gnu-toolchain &&\
+	cd gcc &&\
 	git remote add k https://github.com/WuSiYu/riscv-gcc &&\
 	git fetch k &&\
 	git checkout k/riscv-gcc-10.2.0-crypto &&\
-	cd ../riscv-binutils &&\
+	cd ../binutils &&\
 	git remote add k https://github.com/pz9115/riscv-binutils-gdb.git &&\
 	git fetch k &&\
 	git checkout k/riscv-binutils-2.36-k-ext
 
-crypto_toolchain_setup:
-	cd riscv-crypto && source bin/conf.sh && tools/clone.sh
+build_riscv_crypto_toolchain:
+	mkdir ${RISCV} -p
+	cd riscv-gnu-toolchain &&\
+	./configure --prefix=${RISCV} --with-arch=rv32imc_zbkb_zbkc_zbkx_zkne_zknd_zknh --with-abi=ilp32 --with-multilib-generator=rv64imc_zbkb_zbkc_zbkx_zkne_zknd_zknh-ilp32-- &&\
+	make report-binutils-newlib -j 16 &&\
+	make report-gcc -j 16
 
-crypto_toolchain_build:
-	cd riscv-crypto && source bin/conf.sh && tools/toolchain-conf.sh && tools/toolchain-build.sh
-	cd riscv-crypto && source bin/conf.sh && tools/pk-conf.sh && tools/pk-build.sh
-	cd riscv-crypto && source bin/conf.sh && tools/spike-conf.sh && tools/spike-build.sh
 
 build_isa_sim:
 	mkdir riscv-isa-sim/build -p

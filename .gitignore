@@ -1,1 +1,3 @@
 lowrisc-toolchain-*
+riscv-gnu-toolchain/
+riscv-isa-sim/

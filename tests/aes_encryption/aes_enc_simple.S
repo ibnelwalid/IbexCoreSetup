@@ -4,9 +4,18 @@
 .text
 .global _start; _start:
   li sp, 0x80001000
-  addi t0, zero, 1
-  addi t3, t0, 5
-  aes32esi t2, zero, zero, 0
+  addi t0, zero, 0x210
+  addi t3, zero, 12
+  clmul t2, t3, t0
+  clmul t4, t3, t0
+  aes32esi t2, zero, t0, 0
+  aes32esi t2, zero, t0, 1
+  aes32esi t2, zero, t0, 2
+  aes32esi t2, zero, t0, 3
+  aes32esmi t2, zero, t0, 0
+  aes32esmi t2, zero, t0, 1
+  aes32esmi t2, zero, t0, 2
+  aes32esmi t2, zero, t0, 3
   addi t3, t0, 5
   la t1, tohost
   li t2, 1

@@ -16,6 +16,14 @@
   aes32esmi t2, zero, t0, 1
   aes32esmi t2, zero, t0, 2
   aes32esmi t2, zero, t0, 3
+  aes32dsi t2, zero, t0, 0
+  aes32dsi t2, zero, t0, 1
+  aes32dsi t2, zero, t0, 2
+  aes32dsi t2, zero, t0, 3
+  aes32dsmi t2, zero, t0, 0
+  aes32dsmi t2, zero, t0, 1
+  aes32dsmi t2, zero, t0, 2
+  aes32dsmi t2, zero, t0, 3
   addi t3, t0, 5
   la t1, tohost
   li t2, 1
